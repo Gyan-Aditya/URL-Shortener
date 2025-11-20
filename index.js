@@ -11,7 +11,7 @@ const {connectToMongoDb}=require("./connection.js");
 const app=express();
 const PORT=8001; 
 
-connectToMongoDb("mongodb://127.0.0.1:27017/short-url").then(()=>{console.log("MongoDb connected")}).catch(()=>{console.log("Database not connected")});
+connectToMongoDb("").then(()=>{console.log("MongoDb connected")}).catch(()=>{console.log("Database not connected")});
 
 app.set("view engine","ejs"); 
 app.set("views", path.resolve('./views'));
@@ -38,24 +38,3 @@ return res.redirect(target);
 });
 app.listen(PORT,()=>{console.log(`Server started at PORT:${PORT}`)})
 
-
-
-
-
-
-// app.get('/test', async(req,res)=>{
-//     const allUrls= await URL.find({});
-//     // return res.end(`
-//     //     <html>
-//     //     <head></head>
-//     //     <body>
-//     //         <ol>
-//     //             ${allUrls.map(url=> `<li>${url.shortId}-${url.redirectURL}-${url.visitHistory.length}</li>`).join('')}
-//     //         </ol>
-//     //     </body>
-//     //     </html>
-//     // `);
-//     return res.render('home',{
-//         urls: allUrls,
-//     });
-// });
