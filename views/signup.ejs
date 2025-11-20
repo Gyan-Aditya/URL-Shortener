@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener Account Signup</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Using a vibrant indigo gradient */
+            background: linear-gradient(135deg, #1f2937 0%, #0f172a 100%);
+            min-height: 100vh;
+        }
+
+        /* Custom animation styles */
+        .card-animation {
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+        }
+        .card-animation:hover {
+            /* 3D lift and shadow glow */
+            transform: translateY(-10px) rotateX(1deg);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-hover-effect {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-hover-effect:hover {
+            background-color: #6366f1; /* Lighter indigo */
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="text-white flex flex-col items-center">
+    
+    <!-- Navbar -->
+    <nav class="w-full bg-gray-900 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16">
+                <div class="flex space-x-8">
+                    <a href="#" class="text-gray-300 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                    <a href="#" class="text-gray-300 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300">My Links</a>
+                    <a href="#" class="text-gray-300 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300">Pricing</a>
+                    <a href="#" class="text-gray-300 hover:bg-indigo-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Centered Form Container -->
+    <div class="flex justify-center w-full mt-12 p-4">
+        
+        <!-- Form Container -->
+        <div class="w-full max-w-md p-8 rounded-xl bg-gray-800 bg-opacity-70 backdrop-blur-sm card-animation">
+            <h2 class="text-3xl font-extrabold mb-8 text-indigo-400 text-center">Start Shortening URLs!</h2>
+            
+            <!-- EJS: Display Server-Side Error Message -->
+            <% if (locals.error) { %>
+            <div class="p-4 mb-4 bg-red-600 rounded-lg shadow-lg text-center transition duration-300" role="alert">
+                <p class="font-bold">Error:</p>
+                <p><%= error %></p>
+            </div>
+            <% } %>
+            
+            <form id="signupForm" action="/user" method="post" onsubmit="return handleSignup(event)" class="space-y-4">
+                
+                <label for="name" class="block text-sm font-medium text-gray-300">Full Name</label>
+                <input type="text" id="name" required name="name" placeholder="John Doe"
+                       class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-indigo-500 text-gray-100 transition duration-200" />
+                
+                <label for="email" class="block text-sm font-medium text-gray-300">Email Address</label>
+                <input type="email" id="email" required name="email" placeholder="user@example.com"
+                       class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-indigo-500 text-gray-100 transition duration-200"> 
+                
+                <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                <input type="password" id="password" required name="password" placeholder="Min 8 characters"
+                       class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:ring-2 focus:ring-indigo-500 text-gray-100 transition duration-200">
+                <span id="errorPassword" class="text-red-400 text-xs mt-1 block"></span>
+                
+                <button type="submit" id="signupButton" class="w-full py-3 mt-6 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-md hover:shadow-lg btn-hover-effect">
+                    Create Account
+                </button>
+            </form>
+        </div>
+        
+    </div>
+
+    <script>
+        /**
+         * Handles the form submission, performing validation.
+         * Returns true to submit the form, or false to prevent it.
+         */
+        function handleSignup(event) {
+            // This function returns true to allow the form to submit to the server, 
+            // which will handle the signup logic and redirect.
+            
+            const passwordInput = document.getElementById("password");
+            const password = passwordInput.value;
+            const errorPassword = document.getElementById("errorPassword");
+
+            errorPassword.innerHTML = "";
+
+            // --- Client-Side Validation ---
+            if (password.length < 8 || password.length > 15) {
+                errorPassword.innerHTML = "Password must be between 8 and 15 characters.";
+                passwordInput.focus(); 
+                // Return false stops the form from submitting.
+                return false; 
+            } 
+            
+            // If validation passes, return true to allow the form POST action to execute.
+            return true;
+        }
+
+    </script>
+</body>
+</html>

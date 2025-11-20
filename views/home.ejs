@@ -1,0 +1,146 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex flex-col items-center p-8">
+
+    <div class="bg-gray-800 p-10 rounded-xl shadow-2xl w-full max-w-lg mb-8 text-center" data-tilt data-tilt-max="10" data-tilt-speed="400">
+        <h1 class="text-4xl font-bold mb-4 text-white">URL Shortener</h1>
+        
+        <% if (locals.id) { %>
+            <div class="bg-gray-700 p-4 rounded-lg mb-6">
+                <p class="text-lg">URL Generated:</p>
+                <a href="http://localhost:8001/url/<%= id %>" class="text-cyan-400 hover:underline break-all">http://localhost:8001/url/<%= id %></a>
+            </div>
+        <% } %>
+
+        <form method="POST" action="/url" class="flex flex-col sm:flex-row gap-4">
+            <input type="text" name="url" placeholder="https://example.com" class="flex-1 bg-gray-700 text-gray-200 p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"/>
+            <button type="submit" class="bg-cyan-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-cyan-600 transition-colors duration-300">Generate</button>
+        </form>
+    </div>
+    
+    <% if (locals.urls && urls.length > 0) { %>
+        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-4xl overflow-x-auto">
+            <table class="w-full text-left table-auto">
+                <thead>
+                    <tr class="text-gray-400 uppercase text-sm">
+                        <th class="py-3 px-4">S. No</th>
+                        <th class="py-3 px-4">ShortID</th>
+                        <th class="py-3 px-4">RedirectURL</th>
+                        <th class="py-3 px-4">Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                    <tr class="border-t border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+                        <td class="py-3 px-4"><%= index + 1 %></td>
+                        <td class="py-3 px-4 font-mono text-cyan-400"><%= url.shortId %></td>
+                        <td class="py-3 px-4 truncate max-w-xs"><a href="<%= url.redirectURL %>" class="text-gray-300 hover:underline"><%= url.redirectURL %></a></td>
+                        <td class="py-3 px-4 text-center"><%= url.visitHistory.length %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Hover animation for the main card */
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Hover animation for the table rows */
+        .table-row-hover-effect:hover {
+            background-color: rgba(55, 65, 81, 0.5); /* A slightly lighter gray on hover */
+            transform: scale(1.01);
+            box-shadow: 0 4px 8px rgba(0, 255, 255, 0.1);
+        }
+        .table-row-hover-effect {
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex flex-col items-center p-8">
+
+    <div class="bg-gray-800 p-10 rounded-xl shadow-2xl w-full max-w-lg mb-8 text-center card-hover-effect">
+        <h1 class="text-4xl font-bold mb-4 text-white">URL Shortener</h1>
+        
+        <% if (locals.id) { %>
+            <div class="bg-gray-700 p-4 rounded-lg mb-6">
+                <p class="text-lg">URL Generated:</p>
+                <a href="http://localhost:8001/url/<%= id %>" class="text-cyan-400 hover:underline break-all">http://localhost:8001/url/<%= id %></a>
+            </div>
+        <% } %>
+
+        <form method="POST" action="/url" class="flex flex-col sm:flex-row gap-4">
+            <input type="text" name="url" placeholder="https://example.com" class="flex-1 bg-gray-700 text-gray-200 p-3 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"/>
+            <button type="submit" class="bg-cyan-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-cyan-600 transition-colors duration-300">Generate</button>
+        </form>
+    </div>
+    
+    <% if (locals.urls && urls.length > 0) { %>
+        <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-4xl overflow-x-auto">
+            <table class="w-full text-left table-auto">
+                <thead>
+                    <tr class="text-gray-400 uppercase text-sm">
+                        <th class="py-3 px-4">S. No</th>
+                        <th class="py-3 px-4">ShortID</th>
+                        <th class="py-3 px-4">RedirectURL</th>
+                        <th class="py-3 px-4">Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% urls.forEach((url, index) => { %>
+                    <tr class="border-t border-gray-700 table-row-hover-effect">
+                        <td class="py-3 px-4"><%= index + 1 %></td>
+                        <td class="py-3 px-4 font-mono text-cyan-400"><%= url.shortId %></td>
+                        <td class="py-3 px-4 truncate max-w-xs"><a href="<%= url.redirectURL %>" class="text-gray-300 hover:underline"><%= url.redirectURL %></a></td>
+                        <td class="py-3 px-4 text-center"><%= url.visitHistory.length %></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Login Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Poppins', sans-serif;
+            }
+
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background: linear-gradient(45deg, #243B55, #14284A); /* Dark Blue Gradient */
+            }
+
+            .container {
+                position: relative;
+                width: 350px;
+                height: 500px;
+                background: rgba(30, 41, 59, 0.3); /* Darker, Translucent Background */
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                backdrop-filter: blur(5px);
+                box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2); /* Increased Shadow */
+            }
+
+            .login-box {
+                position: relative;
+                width: 100%;
+                padding: 40px;
+            }
+
+            .login-box h2 {
+                color: #E0E0E0; /* Light Gray Text */
+                text-align: center;
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+
+            .input-box {
+                position: relative;
+                width: 100%;
+                height: 50px;
+                margin-bottom: 25px;
+            }
+
+            .input-box input {
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                border: none;
+                outline: none;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.3); /* Less Opaque Border */
+                font-size: 16px;
+                color: #fff;
+                padding: 0 35px 0 5px;
+                transition: 0.3s;
+            }
+
+            .input-box label {
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                transform: translateY(-50%);
+                font-size: 16px;
+                color: #BDBDBD; /* Darker Gray */
+                pointer-events: none;
+                transition: 0.3s;
+            }
+
+            .input-box input:focus ~ label,
+            .input-box input:valid ~ label {
+                top: -5px;
+                font-size: 12px;
+                color: #82B1FF; /* Light Blue on Focus */
+            }
+
+            .input-box i {
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: rgba(255, 255, 255, 0.3); /* Less Opaque Icon */
+                font-size: 18px;
+            }
+
+            .btn {
+                width: 100%;
+                height: 45px;
+                background: #64B5F6; /* Light Blue Button */
+                border: none;
+                outline: none;
+                border-radius: 25px;
+                cursor: pointer;
+                font-size: 16px;
+                color: #fff;
+                font-weight: 500;
+                transition: 0.3s;
+            }
+
+            .btn:hover {
+                background: #42A5F5; /* Darker Blue on Hover */
+            }
+
+            .signup-link {
+                text-align: center;
+                margin-top: 20px;
+                color: #E0E0E0; /* Light Gray Text */
+            }
+
+            .signup-link a {
+                color: #BBDEFB; /* Lighter Blue Link */
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .signup-link a:hover {
+                text-decoration: underline;
+}
+
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="/user/login" method="post">
+                <div class="input-box">
+                    <input type="text" required name="email">
+                    <label>Email</label>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" required name="password">
+                    <label>Password</label>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+            </form>
+            <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+    </div>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('.input-box input');
+        const loginBox = document.querySelector('.login-box');
+    
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('focus');
+            });
+    
+            input.addEventListener('blur', () => {
+                if (input.value === '') {
+                    input.parentElement.classList.remove('focus');
+                }
+            });
+        });
+    
+        loginBox.classList.add('fade-in');
+    });
+    </script>
+</body>
+</html>
